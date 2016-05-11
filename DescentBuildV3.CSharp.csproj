@@ -102,12 +102,12 @@
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\MonoPInvokeCallbackAttribute.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\RewardBasedVideoAdClient.cs" />
     <Compile Include="Assets\GoogleMobileAds\Platforms\iOS\Utils.cs" />
-    <Compile Include="Assets\Scripts\BackgroundScrips\BGScaler.cs" />
-    <Compile Include="Assets\Scripts\BackgroundScrips\Collector\BGCollector.cs" />
-    <Compile Include="Assets\Scripts\BackgroundScrips\Collector\BGSpawner.cs" />
+    <Compile Include="Assets\Scripts\BackgroundScripts\BGScaler.cs" />
+    <Compile Include="Assets\Scripts\BackgroundScripts\Collector\BGCollector.cs" />
+    <Compile Include="Assets\Scripts\BackgroundScripts\Collector\BGSpawner.cs" />
     <Compile Include="Assets\Scripts\CameraScripts\CameraScript.cs" />
-    <Compile Include="Assets\Scripts\CloudScrips\CloudCollector.cs" />
-    <Compile Include="Assets\Scripts\CloudScrips\CloudSpawner.cs" />
+    <Compile Include="Assets\Scripts\CloudScripts\CloudCollector.cs" />
+    <Compile Include="Assets\Scripts\CloudScripts\CloudSpawner.cs" />
     <Compile Include="Assets\Scripts\CollectablesScripts\CollectableScript.cs" />
     <Compile Include="Assets\Scripts\GameControllers\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameControllers\GamePlayController.cs" />
@@ -123,6 +123,7 @@
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMoveJoystick.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerScore.cs" />
     <Compile Include="Assets\Scripts\SceneFaderScripts\SceneFader.cs" />
+    <Compile Include="Assets\Scripts\SceneScripts\EndScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Font\readme.txt" />

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class OptionsController : MonoBehaviour {
@@ -75,6 +76,7 @@ public class OptionsController : MonoBehaviour {
 	}
 	
 	public void GoBackToMainMenu(){
-		Application.LoadLevel("MainMenu");
+        //Application.LoadLevel("MainMenu");
+        SceneManager.LoadScene("MainMenu");
 	}
 }

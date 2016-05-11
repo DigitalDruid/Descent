@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -32,6 +33,7 @@ public class HighScoreController : MonoBehaviour {
 	}
 	
 	public void GoBackToMainMenu(){
-		Application.LoadLevel("MainMenu");
+        //Application.LoadLevel("MainMenu");
+        SceneManager.LoadScene("MainMenu");
 	}
 }

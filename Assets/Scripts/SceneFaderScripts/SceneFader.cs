@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class SceneFader : MonoBehaviour {
@@ -35,7 +36,8 @@ public class SceneFader : MonoBehaviour {
 
 		yield return StartCoroutine (MyCoroutine.WaitForRealSeconds(1f));
 
-		Application.LoadLevel(level);
+        // Application.LoadLevel(level);
+        SceneManager.LoadScene(level);
 		fadeAnim.Play("FadeOut");
 
 		yield return StartCoroutine (MyCoroutine.WaitForRealSeconds(.7f));

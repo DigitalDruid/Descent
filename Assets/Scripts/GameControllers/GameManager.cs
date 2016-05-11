@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void OnLevelWasLoaded(){
-		if (Application.loadedLevelName == "GamePlay"){
+		if (/*Application.loadedLevelName*/ SceneManager.GetActiveScene().name == "GamePlay"){
 			if (gameRestartedAfterPlayerDied){
 				GamePlayController.instance.SetScore(score);
 				GamePlayController.instance.SetCoinScore(coinScore);

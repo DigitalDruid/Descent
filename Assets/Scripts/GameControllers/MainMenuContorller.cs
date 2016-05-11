@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -32,11 +33,13 @@ public class MainMenuContorller : MonoBehaviour {
 	}
 
 	public void HighScore(){
-		Application.LoadLevel("HighScore");
+        //Application.LoadLevel("HighScore");
+        SceneManager.LoadScene("HighScore");
 	}
 
 	public void Options(){
-		Application.LoadLevel("OptionsMenu");
+        //Application.LoadLevel("OptionsMenu");
+        SceneManager.LoadScene("OptionsMenu");
 	}
 
 	public void QuitGame(){

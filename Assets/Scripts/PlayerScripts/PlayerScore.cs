@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PlayerScore : MonoBehaviour {
@@ -75,7 +76,23 @@ public class PlayerScore : MonoBehaviour {
 			GameManager.instance.CheckGameStatus(scoreCount, coinCount, lifeCount);
 
 		}
-
+        
+        if (target.tag == "EndStage")
+        {
+            switch (SceneManager.GetActiveScene().name)
+            {
+                case "GamePlay":  SceneFader.instance.LoadLevel("GamePlay2"); break;
+                case "GamePlay2": SceneFader.instance.LoadLevel("GamePlay3"); break;
+                case "GamePlay3": SceneFader.instance.LoadLevel("MainMenu");  break;
+            }
+            /*       
+            string tmp = SceneManager.GetActiveScene().name;
+            if (tmp == "GamePlay") { SceneFader.instance.LoadLevel("GamePlay2"); } else
+            if (tmp == "GamePlay2") { SceneFader.instance.LoadLevel("GamePlay3"); } else
+            if (tmp == "GamePlay3") { SceneFader.instance.LoadLevel("MainMenu"); }
+            */
+        }
+        
 //		if (target.tag == "Deadly"){
 //			cameraScript.moveCamera = false;
 //			countScore = false;
