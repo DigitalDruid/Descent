@@ -28,17 +28,15 @@ public class MainMenuContorller : MonoBehaviour {
 	
 	public void StartGame(){
 		GameManager.instance.gameStartedFromMainMenu = true;
-//		Application.LoadLevel("GamePlay");
+       // GameManager.instance.SyncScores(0, 0, 2);
 		SceneFader.instance.LoadLevel("GamePlay");
 	}
 
 	public void HighScore(){
-        //Application.LoadLevel("HighScore");
         SceneManager.LoadScene("HighScore");
 	}
 
 	public void Options(){
-        //Application.LoadLevel("OptionsMenu");
         SceneManager.LoadScene("OptionsMenu");
 	}
 

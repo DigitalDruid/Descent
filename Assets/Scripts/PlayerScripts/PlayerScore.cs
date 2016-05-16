@@ -12,9 +12,9 @@ public class PlayerScore : MonoBehaviour {
 	private Vector3 previousPosition;
 	private bool countScore;
 
-	public static int scoreCount;
-	public static int lifeCount;
-	public static int coinCount;
+	private static int scoreCount;
+	private static int lifeCount;
+	private static int coinCount;
 
     public static int Score { get{return scoreCount;} set{scoreCount = value;} }
     public static int Lives { get{return lifeCount;}  set{lifeCount  = value;} }
@@ -33,43 +33,34 @@ public class PlayerScore : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		CountScore();
-	}
+
+        GamePlayController.instance.SetScore(Score);
+        GamePlayController.instance.SetCoinScore(Coins);
+        GamePlayController.instance.SetLifeScore(Lives);
+    }
 
 	void CountScore(){
 		if(countScore){
 			if(transform.position.y < previousPosition.y){
-                scoreCount++;
-                //Score++;
+                Score++;
 			}
 			previousPosition = transform.position;
-
-			GamePlayController.instance.SetScore(scoreCount);
 		}
 	}
 
 	void OnTriggerEnter2D (Collider2D target){
 
 		if(target.tag == "Coin"){
-            coinCount++;
-            scoreCount += 200;
-            //Coins++;
-            //Score += 200;
-
-			GamePlayController.instance.SetScore(scoreCount);
-			GamePlayController.instance.SetCoinScore(coinCount);
+            Coins++;
+            Score += 200;
 
 			AudioSource.PlayClipAtPoint(coinClip, transform.position);
 			target.gameObject.SetActive(false);
 		}
 
 		if (target.tag == "Life"){
-            lifeCount++;
-            scoreCount += 300;
-            //Lives++;
-            //Score += 300;
-
-			GamePlayController.instance.SetScore(scoreCount);
-			GamePlayController.instance.SetLifeScore(lifeCount);
+            Lives++;
+            Score += 300;
 
 			AudioSource.PlayClipAtPoint(lifeClip, transform.position);
 			target.gameObject.SetActive(false);
@@ -80,10 +71,9 @@ public class PlayerScore : MonoBehaviour {
 			countScore = false;
 
 			transform.position = new Vector3 (500, 500, 0);
-			lifeCount--;
-            //Lives--;
-
-			GameManager.instance.CheckGameStatus(scoreCount, coinCount, lifeCount);
+            Lives--;
+            
+			GameManager.instance.CheckGameStatus(Score, Coins, Lives);
 
 		}
 
@@ -94,9 +84,17 @@ public class PlayerScore : MonoBehaviour {
         if (target.tag == "EndStage"){
             // Current Scene determines the next Scene to load.
             switch (SceneManager.GetActiveScene().name){
-                case "GamePlay":  SceneFader.instance.LoadLevel("GamePlay2"); break;
-                case "GamePlay2": SceneFader.instance.LoadLevel("GamePlay3"); break;
-                case "GamePlay3": SceneFader.instance.LoadLevel("MainMenu");  break;
+                case "GamePlay":
+                    GameManager.gameStartedFromPreviousLevel = true;
+                    SceneFader.instance.LoadLevel("GamePlay2");
+                    break;
+                case "GamePlay2":
+                    GameManager.gameStartedFromPreviousLevel = true;
+                    SceneFader.instance.LoadLevel("GamePlay3");
+                    break;
+                case "GamePlay3":
+                    SceneFader.instance.LoadLevel("MainMenu");
+                    break;
             }
         }
 	}

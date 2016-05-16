@@ -8,9 +8,13 @@ public class GameManager : MonoBehaviour {
 
 	[HideInInspector]
 	public bool gameStartedFromMainMenu, gameRestartedAfterPlayerDied;
+    [HideInInspector]
+    public static bool gameStartedFromPreviousLevel;
 
-	[HideInInspector]
-	public int score, coinScore, lifeScore;
+    [HideInInspector]
+	public int depthScore, coinScore, lifeScore;
+
+    public static string curScene { get { return SceneManager.GetActiveScene().name; } }
 
 	// Use this for initialization
 	void Awake () {
@@ -20,28 +24,38 @@ public class GameManager : MonoBehaviour {
 	void Start(){
 		IntializeVariables();
 	}
-
-	void OnLevelWasLoaded(){
-		if (/*Application.loadedLevelName*/ SceneManager.GetActiveScene().name == "GamePlay"){
-			if (gameRestartedAfterPlayerDied){
-				GamePlayController.instance.SetScore(score);
-				GamePlayController.instance.SetCoinScore(coinScore);
-				GamePlayController.instance.SetLifeScore(lifeScore);
-
-				PlayerScore.scoreCount = score;
-				PlayerScore.coinCount = coinScore;
-				PlayerScore.lifeCount = lifeScore;
-			} else if (gameStartedFromMainMenu) {
-				PlayerScore.coinCount = 0;
-				PlayerScore.scoreCount = 0;
-				PlayerScore.lifeCount = 2;
-
-				GamePlayController.instance.SetScore(0);
-				GamePlayController.instance.SetCoinScore(0);
-				GamePlayController.instance.SetLifeScore(2);
-
-			}
-		}
+    public void SyncScores(int score,int coins,int lives)
+    {
+        PlayerScore.Score = score;
+        PlayerScore.Coins = coins;
+        PlayerScore.Lives = lives;
+        /*
+        GamePlayController.instance.SetScore(score);
+        GamePlayController.instance.SetCoinScore(coins);
+        GamePlayController.instance.SetLifeScore(lives);
+        */
+    }
+    void OnLevelWasLoaded(){
+        switch (curScene)
+        {
+            case "GamePlay":
+                {
+                    if (gameRestartedAfterPlayerDied) { SyncScores(PlayerScore.Score,PlayerScore.Coins,PlayerScore.Lives); }
+                    else if (gameStartedFromMainMenu) { SyncScores(0,0,2); }
+                } break;
+            case "GamePlay2":
+                {
+                    if (gameRestartedAfterPlayerDied || gameStartedFromPreviousLevel) {
+                        SyncScores(PlayerScore.Score, PlayerScore.Coins, PlayerScore.Lives);
+                    }
+                } break;
+            case "GamePlay3":
+                {
+                    if (gameRestartedAfterPlayerDied || gameStartedFromPreviousLevel) {
+                        SyncScores(PlayerScore.Score, PlayerScore.Coins, PlayerScore.Lives);
+                    }
+                } break;
+        }
 	}
 
 	void IntializeVariables(){
@@ -75,69 +89,49 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public void CheckGameStatus (int score, int coinScore, int lifeScore){
-		if (lifeScore < 0){
+	public void CheckGameStatus (int score, int coins, int lives){
+		if (lives < 0){
 
-			if(GamePreferences.GetEasyDificulltyState() == 1){
+            if(GamePreferences.GetEasyDificulltyState() == 1){
 				int highScore = GamePreferences.GetEasyDificulltyHighScoreState();
-				int coinHighScore = GamePreferences.GetEasyDificulltyCoinScoreState();
+				if (highScore < score) { GamePreferences.SetEasyDifficultyHighScoreState(score); }
 
-				if (highScore < score) {
-					GamePreferences.SetEasyDifficultyHighScoreState(score);
-
-				}
-
-				if (coinHighScore < coinScore){
-					GamePreferences.SetEasyDifficultyCoinScoreState(coinScore);
-				}
+                int coinHighScore = GamePreferences.GetEasyDificulltyCoinScoreState();
+                if (coinHighScore < coins){	GamePreferences.SetEasyDifficultyCoinScoreState(coins);	}
 			}
 
-			if(GamePreferences.GetMediumDificulltyState() == 1){
+            if(GamePreferences.GetMediumDificulltyState() == 1){
 				int highScore = GamePreferences.GetMediumDificulltyHighScoreState();
-				int coinHighScore = GamePreferences.GetMediumDificulltyCoinScoreState();
+                if (highScore < score) { GamePreferences.SetMediumDifficultyHighScoreState(score); }
 
-				if (highScore < score) {
-					GamePreferences.SetMediumDifficultyHighScoreState(score);
+                int coinHighScore = GamePreferences.GetMediumDificulltyCoinScoreState();
+                if (coinHighScore < coins) { GamePreferences.SetMediumDifficultyCoinScoreState(coins); }
+            }
 
-				}
-
-				if (coinHighScore < coinScore){
-					GamePreferences.SetMediumDifficultyCoinScoreState(coinScore);
-				}
-			}
-
-
-			if(GamePreferences.GetHardDificulltyState() == 1){
+            if(GamePreferences.GetHardDificulltyState() == 1){
 				int highScore = GamePreferences.GetHardDificulltyHighScoreState();
-				int coinHighScore = GamePreferences.GetHardDifficultyCoinScoreState();
+                if (highScore < score) { GamePreferences.SetHardDifficultyHighScoreState(score); }
 
-				if (highScore < score) {
-					GamePreferences.SetHardDifficultyHighScoreState(score);
-
-				}
-
-				if (coinHighScore < coinScore){
-					GamePreferences.SetHardDifficultyCoinScoreState(coinScore);
-				}
-			}
-
-
+                int coinHighScore = GamePreferences.GetHardDifficultyCoinScoreState();
+                if (coinHighScore < coins) { GamePreferences.SetHardDifficultyCoinScoreState(coins); }
+            }
+            
 			gameStartedFromMainMenu = false;
 			gameRestartedAfterPlayerDied = false;
+            gameStartedFromPreviousLevel = false;
 
-			GamePlayController.instance.GameOverShowPanel(score, coinScore);
+			GamePlayController.instance.GameOverShowPanel(score, coins);
 
 		} else {
-
-			this.score = score;
-			this.coinScore = coinScore;
-			this.lifeScore = lifeScore;
+            PlayerScore.Score = score;
+            PlayerScore.Coins = coins;
+            PlayerScore.Lives = lives;
 
 			gameRestartedAfterPlayerDied = true;
 			gameStartedFromMainMenu = false;
+            gameStartedFromPreviousLevel = false;
 
 			GamePlayController.instance.PlayerDiedRestartTheGame();
-
 		}
 	}
 }

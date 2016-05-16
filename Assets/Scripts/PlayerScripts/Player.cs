@@ -31,31 +31,19 @@ public class Player : MonoBehaviour {
 
 		float h = Input.GetAxisRaw ("Horizontal");
 
-		if( h > 0) {
+        if (h == 0) { anim.SetBool("Walk", false); }
+        else {
+            int m = (h > 0) ? 1 : -1;
 
-			if(vel < maxVelocity)
-				forceX = speed;
+            if (vel < maxVelocity) { forceX = m * speed; }
 
-			Vector3 temp = transform.localScale;
-			temp.x = 1.3f;
-			transform.localScale = temp;
+            Vector3 temp = transform.localScale;
+            temp.x = m * 1.3f;
+            transform.localScale = temp;
 
-			anim.SetBool ("Walk", true);
-
-			}else if (h < 0){
-
-				if(vel < maxVelocity)
-					forceX = -speed;
-
-			Vector3 temp = transform.localScale;
-			temp.x = -1.3f;
-			transform.localScale = temp;
-
-			anim.SetBool ("Walk", true);
-		} else {
-			anim.SetBool("Walk", false);
-		}
-
+            anim.SetBool("Walk", true);
+        }
+        
 		myBody.AddForce (new Vector2(forceX, 0));
 	}
 }

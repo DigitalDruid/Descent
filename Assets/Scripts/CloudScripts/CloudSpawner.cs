@@ -159,7 +159,7 @@ public class CloudSpawner : MonoBehaviour {
 								temp2.y += 0.7f;
 
 								if(collectables[random].tag == "Life"){
-										if(PlayerScore.lifeCount < 2){
+										if(PlayerScore.Lives < 2){
 											collectables[random].transform.position = temp2;
 											collectables[random].SetActive(true);
 										}

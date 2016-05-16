@@ -10,7 +10,7 @@ public class GamePlayController : MonoBehaviour {
 	private Text scoreText, coinScoreText, lifeText, gameOverScoreText, gameOverCoinText;
 
 	[SerializeField]
-	private GameObject pausePanel, gameOverPanel;
+	private GameObject pausePanel, gameOverPanel, endStageGroup;
 
 	[SerializeField]
 	private GameObject readyButton;
@@ -49,20 +49,12 @@ public class GamePlayController : MonoBehaviour {
 
 	IEnumerator PlayerDiedRestart(){
 		yield return new WaitForSeconds (1f);
-		SceneFader.instance.LoadLevel("GamePlay");
+		SceneFader.instance.LoadLevel(GameManager.curScene);
 	}
 
-	public void SetScore(int score){
-		scoreText.text = "x" + score;
-	}
-
-	public void SetCoinScore(int coinScore){
-		coinScoreText.text = "x" + coinScore;
-	}
-
-	public void SetLifeScore(int lifeScore){
-		lifeText.text = "x" + lifeScore;
-	}
+    public void SetScore(int scr) {     scoreText.text = "x" + scr; }
+    public void SetCoinScore(int scr){  coinScoreText.text = "x" + scr; }
+    public void SetLifeScore(int scr){  lifeText.text = "x" + scr; }
 
 	public void PauseTheGame(){
 		Time.timeScale = 0f;
@@ -76,7 +68,6 @@ public class GamePlayController : MonoBehaviour {
 
 	public void QuitGame(){
 		Time.timeScale = 1f;
-//		Application.LoadLevel("MainMenu");
 		SceneFader.instance.LoadLevel("MainMenu");
 	}
 

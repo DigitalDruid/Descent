@@ -17,19 +17,24 @@ public class PlayerMoveJoystick : MonoBehaviour {
 		anim = GetComponent<Animator>();
 	}
 
-	void FixedUpdate(){
-		if(moveLeft){
-			MoveLeft();
-		}
+    void FixedUpdate()
+    {
+        if (moveLeft) { MovePlayer(-1); }
+        else if (moveRight) { MovePlayer(1); }
+        else
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            if (h == 0) { StopMoving(); }
+            else {
+                int m = (h > 0) ? 1 : -1;
+                MovePlayer(m);
+            }
+        }
+    }
 
-		if (moveRight){
-			MoveRight();
-		}
-	}
-
-	public void SetMoveLeft(bool moveLeft){
-		this.moveLeft = moveLeft;
-		this.moveRight = !moveLeft;
+	public void SetMoveLeft(bool ml){
+        moveLeft = ml;
+        moveRight = !ml;
 	}
 
 	public void StopMoving(){
@@ -37,35 +42,20 @@ public class PlayerMoveJoystick : MonoBehaviour {
 		anim.SetBool ("Walk", false);
 	}
 
-	void MoveLeft(){
-		float forceX = 0f;
-		float vel = Mathf.Abs (myBody.velocity.x);
+    void MovePlayer(int direction)
+    {
+        float forceX = 0f;
+        float vel = Mathf.Abs(myBody.velocity.x);
 
-		if(vel < maxVelocity)
-					forceX = -speed;
+        if (vel < maxVelocity)
+            forceX = direction * speed;
 
-			Vector3 temp = transform.localScale;
-			temp.x = -1.3f;
-			transform.localScale = temp;
+        Vector3 temp = transform.localScale;
+        temp.x = direction * 1.3f;
+        transform.localScale = temp;
 
-			anim.SetBool ("Walk", true);
+        anim.SetBool("Walk", true);
 
-		myBody.AddForce (new Vector2(forceX, 0));
-	}
-
-	void MoveRight(){
-		float forceX = 0f;
-		float vel = Mathf.Abs (myBody.velocity.x);
-
-		if(vel < maxVelocity)
-				forceX = speed;
-
-			Vector3 temp = transform.localScale;
-			temp.x = 1.3f;
-			transform.localScale = temp;
-
-			anim.SetBool ("Walk", true);
-
-		myBody.AddForce (new Vector2(forceX, 0));
-	}
+        myBody.AddForce(new Vector2(forceX, 0));
+    }
 }
