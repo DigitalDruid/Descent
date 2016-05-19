@@ -47,11 +47,11 @@ Temporary Items
 .apdisk
 
 #Unity3D Files and Folders
-/Library/  
-/Temp/  
-/build/
-/Build/
-/obj/
+/Library
+/Temp
+/build
+/Build
+/obj
 
 *.csproj
 *.sln
