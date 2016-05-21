@@ -19,16 +19,16 @@ public class HighScoreController : MonoBehaviour {
 	}
 
 	void SetTheScoreBasedOnDifficulty(){
-		if(GamePreferences.GetEasyDificulltyState () == 1){
-			SetScore(GamePreferences.GetEasyDificulltyHighScoreState(), GamePreferences.GetEasyDificulltyCoinScoreState());
+		if(GamePreferences.EasyDifficultyState == 1){
+			SetScore(GamePreferences.EasyDifficultyHighScoreState, GamePreferences.EasyDifficultyCoinScoreState);
 		}
 
-		if(GamePreferences.GetMediumDificulltyState () == 1){
-			SetScore(GamePreferences.GetMediumDificulltyHighScoreState(), GamePreferences.GetMediumDificulltyCoinScoreState());
+		if(GamePreferences.MediumDifficultyState == 1){
+			SetScore(GamePreferences.MediumDifficultyHighScoreState, GamePreferences.MediumDifficultyCoinScoreState);
 		}
 
-		if(GamePreferences.GetHardDificulltyState () == 1){
-			SetScore(GamePreferences.GetHardDificulltyHighScoreState(), GamePreferences.GetHardDifficultyCoinScoreState());
+		if(GamePreferences.HardDifficultyState == 1){
+			SetScore(GamePreferences.HardDifficultyHighScoreState, GamePreferences.HardDifficultyCoinScoreState);
 		}
 	}
 	

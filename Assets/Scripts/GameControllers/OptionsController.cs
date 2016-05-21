@@ -32,23 +32,23 @@ public class OptionsController : MonoBehaviour {
 	}
 
 	void SetTheDifficulty(){
-		if(GamePreferences.GetEasyDificulltyState() == 1){
+		if(GamePreferences.EasyDifficultyState == 1){
 			SetInitialDifficulty("easy");
 		}
 
-		if(GamePreferences.GetMediumDificulltyState() == 1){
+		if(GamePreferences.MediumDifficultyState == 1){
 			SetInitialDifficulty("medium");
 		}
 
-		if(GamePreferences.GetHardDificulltyState() == 1){
+		if(GamePreferences.HardDifficultyState == 1){
 			SetInitialDifficulty("hard");
 		}
 	}
 
 	public void EasyDifficlty(){
-		GamePreferences.SetEasyDifficultyState (1);
-		GamePreferences.SetMediumDifficultyState (0);
-		GamePreferences.SetHardDifficultyState (0);
+        GamePreferences.EasyDifficultyState = 1;
+        GamePreferences.MediumDifficultyState = 0;
+        GamePreferences.HardDifficultyState = 0;
 
 		easySign.SetActive(true);
 		mediumSign.SetActive(false);
@@ -56,9 +56,9 @@ public class OptionsController : MonoBehaviour {
 	}
 
 	public void MediumDifficlty(){
-		GamePreferences.SetEasyDifficultyState (0);
-		GamePreferences.SetMediumDifficultyState (1);
-		GamePreferences.SetHardDifficultyState (0);
+        GamePreferences.EasyDifficultyState = 0;
+        GamePreferences.MediumDifficultyState = 1;
+        GamePreferences.HardDifficultyState = 0;
 
 		easySign.SetActive(false);
 		mediumSign.SetActive(true);
@@ -66,9 +66,9 @@ public class OptionsController : MonoBehaviour {
 	}
 
 	public void HardDifficlty(){
-		GamePreferences.SetEasyDifficultyState (0);
-		GamePreferences.SetMediumDifficultyState (0);
-		GamePreferences.SetHardDifficultyState (1);
+        GamePreferences.EasyDifficultyState = 0;
+        GamePreferences.MediumDifficultyState = 0;
+        GamePreferences.HardDifficultyState = 1;
 
 		easySign.SetActive(false);
 		mediumSign.SetActive(false);

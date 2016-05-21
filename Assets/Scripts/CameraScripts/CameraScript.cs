@@ -17,15 +17,15 @@ public class CameraScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if (GamePreferences.GetEasyDificulltyState() == 1){
+		if (GamePreferences.EasyDifficultyState == 1){
 			maxSpeed = easySpeed;
 		}
 
-		if (GamePreferences.GetMediumDificulltyState() == 1){
+		if (GamePreferences.MediumDifficultyState == 1){
 			maxSpeed = mediumSpeed;
 		}
 
-		if (GamePreferences.GetHardDificulltyState() == 1){
+		if (GamePreferences.HardDifficultyState == 1){
 			maxSpeed = hardSpeed;
 		}
 

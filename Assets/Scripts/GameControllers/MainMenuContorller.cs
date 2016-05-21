@@ -17,7 +17,7 @@ public class MainMenuContorller : MonoBehaviour {
 	}
 
 	void CheckToPlayMusic(){
-		if (GamePreferences.GetMusicState () ==1){
+		if (GamePreferences.MusicState == 1){
 			MusicController.instance.PlayMusic(true);
 			musicBtn.image.sprite = musicIcons [1];
 		} else{
@@ -45,12 +45,12 @@ public class MainMenuContorller : MonoBehaviour {
 	}
 
 	public void MusicButton(){
-		if (GamePreferences.GetMusicState () == 0) {
-			GamePreferences.SetMusicState(1);
+		if (GamePreferences.MusicState == 0) {
+            GamePreferences.MusicState = 1;
 			MusicController.instance.PlayMusic(true);
 			musicBtn.image.sprite = musicIcons[1];
-		} else if (GamePreferences.GetMusicState() == 1){
-			GamePreferences.SetMusicState(0);
+		} else if (GamePreferences.MusicState == 1){
+            GamePreferences.MusicState = 0;
 			MusicController.instance.PlayMusic(false);
 			musicBtn.image.sprite = musicIcons[0];
 		}

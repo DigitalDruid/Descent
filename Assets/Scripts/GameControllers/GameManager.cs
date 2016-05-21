@@ -68,19 +68,19 @@ public class GameManager : MonoBehaviour {
     void IntializeVariables() {
 
         if (!PlayerPrefs.HasKey("Game Initialized")) {
-            GamePreferences.SetEasyDifficultyState(0);
-            GamePreferences.SetEasyDifficultyCoinScoreState(0);
-            GamePreferences.SetEasyDifficultyHighScoreState(0);
+            GamePreferences.EasyDifficultyState = 0;
+            GamePreferences.EasyDifficultyCoinScoreState = 0;
+            GamePreferences.EasyDifficultyHighScoreState = 0;
 
-            GamePreferences.SetMediumDifficultyState(1);
-            GamePreferences.SetMediumDifficultyCoinScoreState(0);
-            GamePreferences.SetMediumDifficultyHighScoreState(0);
+            GamePreferences.MediumDifficultyState = 1;
+            GamePreferences.MediumDifficultyCoinScoreState = 0;
+            GamePreferences.MediumDifficultyHighScoreState = 0;
 
-            GamePreferences.SetHardDifficultyState(0);
-            GamePreferences.SetHardDifficultyCoinScoreState(0);
-            GamePreferences.SetHardDifficultyHighScoreState(0);
+            GamePreferences.HardDifficultyState = 0;
+            GamePreferences.HardDifficultyCoinScoreState = 0;
+            GamePreferences.HardDifficultyHighScoreState = 0;
 
-            GamePreferences.SetMusicState(0);
+            GamePreferences.MusicState = 0;
 
             PlayerPrefs.SetInt("Game Initialized", 123);
         }
@@ -90,28 +90,28 @@ public class GameManager : MonoBehaviour {
     public void CheckGameStatus(int score, int coins, int lives) {
         if (lives < 0) {
 
-            if (GamePreferences.GetEasyDificulltyState() == 1) {
-                int highScore = GamePreferences.GetEasyDificulltyHighScoreState();
-                if (highScore < score) { GamePreferences.SetEasyDifficultyHighScoreState(score); }
+            if (GamePreferences.EasyDifficultyState == 1) {
+                int highScore = GamePreferences.EasyDifficultyHighScoreState;
+                if (highScore < score) { GamePreferences.EasyDifficultyHighScoreState = score; }
 
-                int coinHighScore = GamePreferences.GetEasyDificulltyCoinScoreState();
-                if (coinHighScore < coins) { GamePreferences.SetEasyDifficultyCoinScoreState(coins); }
+                int coinHighScore = GamePreferences.EasyDifficultyCoinScoreState;
+                if (coinHighScore < coins) { GamePreferences.EasyDifficultyCoinScoreState = coins; }
             }
 
-            if (GamePreferences.GetMediumDificulltyState() == 1) {
-                int highScore = GamePreferences.GetMediumDificulltyHighScoreState();
-                if (highScore < score) { GamePreferences.SetMediumDifficultyHighScoreState(score); }
+            if (GamePreferences.MediumDifficultyState == 1) {
+                int highScore = GamePreferences.MediumDifficultyHighScoreState;
+                if (highScore < score) { GamePreferences.MediumDifficultyHighScoreState = score; }
 
-                int coinHighScore = GamePreferences.GetMediumDificulltyCoinScoreState();
-                if (coinHighScore < coins) { GamePreferences.SetMediumDifficultyCoinScoreState(coins); }
+                int coinHighScore = GamePreferences.MediumDifficultyCoinScoreState;
+                if (coinHighScore < coins) { GamePreferences.MediumDifficultyCoinScoreState = coins; }
             }
 
-            if (GamePreferences.GetHardDificulltyState() == 1) {
-                int highScore = GamePreferences.GetHardDificulltyHighScoreState();
-                if (highScore < score) { GamePreferences.SetHardDifficultyHighScoreState(score); }
+            if (GamePreferences.HardDifficultyState == 1) {
+                int highScore = GamePreferences.HardDifficultyHighScoreState;
+                if (highScore < score) { GamePreferences.HardDifficultyHighScoreState = score; }
 
-                int coinHighScore = GamePreferences.GetHardDifficultyCoinScoreState();
-                if (coinHighScore < coins) { GamePreferences.SetHardDifficultyCoinScoreState(coins); }
+                int coinHighScore = GamePreferences.HardDifficultyCoinScoreState;
+                if (coinHighScore < coins) { GamePreferences.HardDifficultyCoinScoreState = coins; }
             }
 
             gameStartedFromMainMenu = false;
