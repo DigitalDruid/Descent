@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
-public class MainMenuContorller : MonoBehaviour {
+public class MainMenuController : MonoBehaviour {
 
 	[SerializeField]
 	private Button musicBtn;
