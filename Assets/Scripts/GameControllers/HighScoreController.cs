@@ -9,31 +9,16 @@ public class HighScoreController : MonoBehaviour {
 	public Text scoreText, coinText;
 
 	// Use this for initialization
-	void Start () {
-		SetTheScoreBasedOnDifficulty();
+	void Start() {
+        SetScore(GamePreferences.HighScoreState, GamePreferences.CoinScoreState);
+        // scoreText.text = GamePreferences.HighScoreState.ToString();
+        // coinText.text = GamePreferences.CoinScoreState.ToString();
 	}
 
-	void SetScore(int score, int coinScore){
+	void SetScore (int score, int coinScore) {
 		scoreText.text = score.ToString();
 		coinText.text = coinScore.ToString();
 	}
-
-	void SetTheScoreBasedOnDifficulty(){
-		if(GamePreferences.EasyDifficultyState == 1){
-			SetScore(GamePreferences.EasyDifficultyHighScoreState, GamePreferences.EasyDifficultyCoinScoreState);
-		}
-
-		if(GamePreferences.MediumDifficultyState == 1){
-			SetScore(GamePreferences.MediumDifficultyHighScoreState, GamePreferences.MediumDifficultyCoinScoreState);
-		}
-
-		if(GamePreferences.HardDifficultyState == 1){
-			SetScore(GamePreferences.HardDifficultyHighScoreState, GamePreferences.HardDifficultyCoinScoreState);
-		}
-	}
-	
-	public void GoBackToMainMenu(){
-        //Application.LoadLevel("MainMenu");
-        SceneManager.LoadScene("MainMenu");
-	}
+    
+    public void GoBackToMainMenu() { /*SceneManager.LoadScene("MainMenu");*/ GameManager.instance.loadLevel("MainMenu"); }
 }

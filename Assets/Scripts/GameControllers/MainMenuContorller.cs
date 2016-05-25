@@ -28,7 +28,7 @@ public class MainMenuContorller : MonoBehaviour {
 	
 	public void StartGame(){
 		GameManager.instance.gameStartedFromMainMenu = true;
-       // GameManager.instance.SyncScores(0, 0, 2);
+        GameManager.instance.SyncScores();
 		SceneFader.instance.LoadLevel("GamePlay");
 	}
 

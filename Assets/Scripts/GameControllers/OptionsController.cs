@@ -6,77 +6,51 @@ public class OptionsController : MonoBehaviour {
 
 	[SerializeField]
 	public GameObject easySign, mediumSign, hardSign;
-
-	// Use this for initialization
-	void Start () {
-		SetTheDifficulty();
+    
+	void Start() {
+		SetDifficulty(GamePreferences.DifficultyState);
 	}
 
-	void SetInitialDifficulty(string difficulty){
+	void SetDifficulty (string difficulty) {
 		switch (difficulty){
-			case "easy":
+			case GamePreferences.EasyDifficulty:
 				mediumSign.SetActive(false);
 				hardSign.SetActive(false);
 				break;
-
-			case "medium":
+			case GamePreferences.MediumDifficulty:
 				easySign.SetActive(false);
 				hardSign.SetActive(false);
 				break;
-
-			case "hard":
+			case GamePreferences.HardDifficulty:
 				easySign.SetActive(false);
 				mediumSign.SetActive(false);
 				break;
 		}
 	}
 
-	void SetTheDifficulty(){
-		if(GamePreferences.EasyDifficultyState == 1){
-			SetInitialDifficulty("easy");
-		}
-
-		if(GamePreferences.MediumDifficultyState == 1){
-			SetInitialDifficulty("medium");
-		}
-
-		if(GamePreferences.HardDifficultyState == 1){
-			SetInitialDifficulty("hard");
-		}
-	}
-
-	public void EasyDifficlty(){
-        GamePreferences.EasyDifficultyState = 1;
-        GamePreferences.MediumDifficultyState = 0;
-        GamePreferences.HardDifficultyState = 0;
-
+	public void EasyDifficulty() {
+        GamePreferences.DifficultyState = GamePreferences.EasyDifficulty;
 		easySign.SetActive(true);
 		mediumSign.SetActive(false);
 		hardSign.SetActive(false);
 	}
 
-	public void MediumDifficlty(){
-        GamePreferences.EasyDifficultyState = 0;
-        GamePreferences.MediumDifficultyState = 1;
-        GamePreferences.HardDifficultyState = 0;
-
+	public void MediumDifficulty() {
+        GamePreferences.DifficultyState = GamePreferences.MediumDifficulty;
 		easySign.SetActive(false);
 		mediumSign.SetActive(true);
 		hardSign.SetActive(false);
 	}
 
-	public void HardDifficlty(){
-        GamePreferences.EasyDifficultyState = 0;
-        GamePreferences.MediumDifficultyState = 0;
-        GamePreferences.HardDifficultyState = 1;
-
+	public void HardDifficulty() {
+        GamePreferences.DifficultyState = GamePreferences.HardDifficulty;
 		easySign.SetActive(false);
 		mediumSign.SetActive(false);
 		hardSign.SetActive(true);
 	}
 	
-	public void GoBackToMainMenu(){
-        //Application.LoadLevel("MainMenu");
-        SceneManager.LoadScene("MainMenu");
+	public void GoBackToMainMenu() {
+        //SceneManager.LoadScene("MainMenu");
+        SceneFader.instance.LoadLevel("MainMenu");
 	}
 }
