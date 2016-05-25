@@ -12,7 +12,7 @@ public class GamePlayController : MonoBehaviour {
 	[SerializeField]
 	public GameObject pausePanel, gameOverPanel, endStageGroup, readyButton;
 
-
+    public bool isReady { get { return readyButton.activeInHierarchy; } }
 	// Use this for initialization
 	void Awake () {
 		MakeInstance();
@@ -35,7 +35,7 @@ public class GamePlayController : MonoBehaviour {
 
 	IEnumerator GameOverLoadMainMenu(){
 		yield return new WaitForSeconds (3f);
-		SceneFader.instance.LoadLevel("MainMenu");
+		SceneFader.instance.LoadLevel(LevelController.instance.MainMenu);
 	}
 
 	public void PlayerDiedRestartTheGame(){
@@ -48,36 +48,35 @@ public class GamePlayController : MonoBehaviour {
 	}
 
     public void SetScore(int scr) {     scoreText.text = "x" + scr; }
-    public void SetCoinScore(int scr){  coinScoreText.text = "x" + scr; }
-    public void SetLifeScore(int scr){  lifeText.text = "x" + scr; }
+    public void SetCoinScore(int scr) {  coinScoreText.text = "x" + scr; }
+    public void SetLifeScore(int scr) {  lifeText.text = (scr>0)? "x" + scr : "x0"; }
 
-	public void PauseTheGame(){
+	public void PauseTheGame() {
 		Time.timeScale = 0f;
 		pausePanel.SetActive(true);
 	}
 
-	public void ResumeGame(){
+	public void ResumeGame() {
 		Time.timeScale = 1f;
 		pausePanel.SetActive(false);
 	}
 
-	public void QuitGame(){
+	public void QuitGame() {
 		Time.timeScale = 1f;
-		SceneFader.instance.LoadLevel("MainMenu");
-	}
+		SceneFader.instance.LoadLevel(LevelController.instance.MainMenu);
+    }
 
-	public void ReadyToStartGame(){
+	public void ReadyToStartGame() {
 		Time.timeScale = 1f;
 		readyButton.SetActive(false);
 	}
 
-    void Update()
-    {
+    void Update() {
         if (PlayerScore.Score >= 0){
             endStageGroup.SetActive(true);
             var pos = endStageGroup.transform.position;
-            pos.Set(pos.x, pos.y + 10, pos.z);
+            pos.Set(pos.x, pos.y - 10, pos.z);
+            //endStageGroup.transform.position = pos;
         }
-        
     }
 }

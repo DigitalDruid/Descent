@@ -33,27 +33,27 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SyncScores(int score=0, int coins=0, int lives=2) {
+    public void SyncScores (int score = 0, int coins = 0, int lives = 2) {
         PlayerScore.Score = score;
         PlayerScore.Coins = coins;
         PlayerScore.Lives = lives;
     }
 
-    public void loadLevel(string sceneName) { SceneFader.instance.LoadLevel(sceneName); }
+    public void loadLevel (string sceneName) { SceneFader.instance.LoadLevel(sceneName); }
 
     void OnLevelWasLoaded() {
-        switch (curScene) {
-            case "GamePlay": {
-                    if (gameRestartedAfterPlayerDied) { SyncScores(PlayerScore.Score, PlayerScore.Coins, PlayerScore.Lives); }
-                    else if (gameStartedFromMainMenu) { SyncScores(startingScore, startingCoins, startingLives); }
-                    else { SyncScores(startingScore, startingCoins, startingLives); }
-                } break;
-            case "GamePlay2":
-            case "GamePlay3": {
-                    if (gameRestartedAfterPlayerDied || gameStartedFromPreviousLevel) {
-                        SyncScores(PlayerScore.Score, PlayerScore.Coins, PlayerScore.Lives);
-                    }
-                } break;
+        if (curScene == LevelController.instance.Levels[0]) {   // "GamePlay"
+            if (gameRestartedAfterPlayerDied) { SyncScores(PlayerScore.Score, PlayerScore.Coins, PlayerScore.Lives); }
+            else if (gameStartedFromMainMenu) { SyncScores(startingScore, startingCoins, startingLives); }
+            else { SyncScores(startingScore, startingCoins, startingLives); }
+        }
+        else if (
+              curScene == LevelController.instance.Levels[1] ||  // "GamePlay2"
+              curScene == LevelController.instance.Levels[2]     // "GamePlay3"
+            ) {
+            if (gameRestartedAfterPlayerDied || gameStartedFromPreviousLevel) {
+                SyncScores(PlayerScore.Score, PlayerScore.Coins, PlayerScore.Lives);
+            }
         }
     }
 
@@ -82,6 +82,15 @@ public class GameManager : MonoBehaviour {
 
     public void gotoNextScene() {
         gameStartedFromPreviousLevel = true;
+        
+        // temporary level code
+        if (curScene == LevelController.instance.Levels[0]) loadLevel(LevelController.instance.Segues[0]);
+        if (curScene == LevelController.instance.Segues[0]) loadLevel(LevelController.instance.Levels[1]);
+        if (curScene == LevelController.instance.Levels[1]) loadLevel(LevelController.instance.Segues[1]);
+        if (curScene == LevelController.instance.Segues[1]) loadLevel(LevelController.instance.Levels[2]);
+        if (curScene == LevelController.instance.Levels[2]) loadLevel(LevelController.instance.GameOver);
+        
+        /*
         // Current Scene determines the next Scene to load.
         switch (curScene) {
             case "GamePlay": loadLevel("InbetweenScene"); break;
@@ -90,5 +99,6 @@ public class GameManager : MonoBehaviour {
             case "InbetweenScene2": loadLevel("GamePlay3"); break;
             case "GamePlay3": loadLevel("MainMenu"); break;
         }
+        */
     }
 }

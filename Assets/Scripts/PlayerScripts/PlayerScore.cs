@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerScore : MonoBehaviour {
 
 	[SerializeField]
-	public AudioClip coinClip, lifeClip;
+	public AudioClip coinClip, lifeClip, landingClip;
 
     private CameraScript cameraScript;
 
@@ -73,6 +73,10 @@ public class PlayerScore : MonoBehaviour {
             Lives--;
 
             GameManager.instance.CheckGameStatus(Score, Coins, Lives);
+        }
+        if (target.tag == "Lander" && !GamePlayController.instance.isReady) {
+            AudioSource.PlayClipAtPoint(landingClip, transform.position);
+            target.gameObject.SetActive(false);
         }
         /* 
          * Testing EndScene.cs
