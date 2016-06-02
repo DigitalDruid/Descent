@@ -3,9 +3,11 @@ using System.Collections;
 
 public class PlayerScore : MonoBehaviour {
 
+    [SerializeField]
+    public AudioSource sfxSource;
 	[SerializeField]
 	public AudioClip coinClip, lifeClip, landingClip;
-
+    
     private CameraScript cameraScript;
 
     private Vector3 previousPosition;
@@ -53,7 +55,8 @@ public class PlayerScore : MonoBehaviour {
             Coins++;
             Score += 200;
 
-            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+            sfxSource.PlayOneShot(coinClip);
+            //AudioSource.PlayClipAtPoint(coinClip, transform.position);
 			target.gameObject.SetActive(false);
 		}
 
@@ -61,7 +64,8 @@ public class PlayerScore : MonoBehaviour {
             Lives++;
             Score += 300;
 
-            AudioSource.PlayClipAtPoint(lifeClip, transform.position);
+            sfxSource.PlayOneShot(lifeClip);
+            //AudioSource.PlayClipAtPoint(lifeClip, transform.position);
 			target.gameObject.SetActive(false);
 		}
 
@@ -75,7 +79,8 @@ public class PlayerScore : MonoBehaviour {
             GameManager.instance.CheckGameStatus(Score, Coins, Lives);
         }
         if (target.tag == "Lander" && !GamePlayController.instance.isReady) {
-            AudioSource.PlayClipAtPoint(landingClip, transform.position);
+            sfxSource.PlayOneShot(landingClip);
+            //AudioSource.PlayClipAtPoint(landingClip, transform.position);
             target.gameObject.SetActive(false);
         }
         /* 

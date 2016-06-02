@@ -3,33 +3,23 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour {
 
-	private float speed = 1f;
-	private float acceleration = 0.2f;
-	private float maxSpeed = 3.2f;
+    [SerializeField]
+	private float speed = 1f, acceleration = 0.2f, maxSpeed = 3.2f;
 
-	private float easySpeed = 3.2f;
-	private float mediumSpeed = 3.7f;
-	private float hardSpeed = 4.2f;
+    [SerializeField]
+	private float easySpeed = 3.2f, mediumSpeed = 3.7f, hardSpeed = 4.2f;
 
 	[HideInInspector]
 	public bool moveCamera;
 
 	// Use this for initialization
 	void Start () {
-
-		if (GamePreferences.EasyDifficultyState == 1){
-			maxSpeed = easySpeed;
-		}
-
-		if (GamePreferences.MediumDifficultyState == 1){
-			maxSpeed = mediumSpeed;
-		}
-
-		if (GamePreferences.HardDifficultyState == 1){
-			maxSpeed = hardSpeed;
-		}
-
-		moveCamera = true;
+        switch (GamePreferences.DifficultyState) {
+            case GamePreferences.EasyDifficulty: maxSpeed = easySpeed; break;
+            case GamePreferences.HardDifficulty: maxSpeed = hardSpeed; break;
+            case GamePreferences.MediumDifficulty: default: maxSpeed = mediumSpeed; break;
+        }
+        moveCamera = true;
 	}
 	
 	// Update is called once per frame
