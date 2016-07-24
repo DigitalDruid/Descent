@@ -138,10 +138,12 @@ public class CloudSpawner : MonoBehaviour {
                                 temp2.y += 0.7f;
 
                                 if (collectibles[random].tag == "Life") {
+                                    /*
                                     if (PlayerScore.Lives < 2) {
                                         collectibles[random].transform.position = temp2;
                                         collectibles[random].SetActive(true);
                                     }
+                                    */
                                 } else {
                                     collectibles[random].transform.position = temp2;
                                     collectibles[random].SetActive(true);

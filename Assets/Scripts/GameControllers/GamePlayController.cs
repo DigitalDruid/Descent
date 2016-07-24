@@ -7,7 +7,7 @@ public class GamePlayController : MonoBehaviour {
 	public static GamePlayController instance;
 
 	[SerializeField]
-	public Text scoreText, coinScoreText, lifeText, gameOverScoreText, gameOverCoinText;
+	public Text scoreText, coinScoreText, /*lifeText,*/ gameOverScoreText, gameOverCoinText;
 
 	[SerializeField]
 	public GameObject pausePanel, gameOverPanel, endStageGroup, readyButton;
@@ -49,7 +49,7 @@ public class GamePlayController : MonoBehaviour {
 
     public void SetScore(int scr) {     scoreText.text = "x" + scr; }
     public void SetCoinScore(int scr) {  coinScoreText.text = "x" + scr; }
-    public void SetLifeScore(int scr) {  lifeText.text = (scr>0)? "x" + scr : "x0"; }
+    //public void SetLifeScore(int scr) {  lifeText.text = (scr>0)? "x" + scr : "x0"; }
 
 	public void PauseTheGame() {
 		Time.timeScale = 0f;

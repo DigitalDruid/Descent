@@ -37,7 +37,7 @@ public class PlayerScore : MonoBehaviour {
 
         GamePlayController.instance.SetScore(Score);
         GamePlayController.instance.SetCoinScore(Coins);
-        GamePlayController.instance.SetLifeScore(Lives);
+        //GamePlayController.instance.SetLifeScore(Lives);
     }
 
 	void CountScore(){
@@ -59,7 +59,7 @@ public class PlayerScore : MonoBehaviour {
             //AudioSource.PlayClipAtPoint(coinClip, transform.position);
 			target.gameObject.SetActive(false);
 		}
-
+        /*
 		if (target.tag == "Life"){
             Lives++;
             Score += 300;
@@ -68,7 +68,7 @@ public class PlayerScore : MonoBehaviour {
             //AudioSource.PlayClipAtPoint(lifeClip, transform.position);
 			target.gameObject.SetActive(false);
 		}
-
+        */
         if (target.tag == "Bounds" || (target.tag=="Deadly" && DebugController.instance.debugOn==false) ){
             cameraScript.moveCamera = false;
             countScore = false;
@@ -77,6 +77,7 @@ public class PlayerScore : MonoBehaviour {
             Lives--;
 
             GameManager.instance.CheckGameStatus(Score, Coins, Lives);
+
         }
         if (target.tag == "Lander" && !GamePlayController.instance.isReady) {
             sfxSource.PlayOneShot(landingClip);
