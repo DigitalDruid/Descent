@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a259a2be80bfcf743bcb3b874705575c
-timeCreated: 1469389192
+timeCreated: 1469576140
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -61,10 +61,10 @@ TextureImporter:
     - name: Coin_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 12
-        height: 12
+        x: 0
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -72,10 +72,10 @@ TextureImporter:
     - name: Coin_1
       rect:
         serializedVersion: 2
-        x: 20
-        y: 2
-        width: 9
-        height: 12
+        x: 16
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -83,10 +83,10 @@ TextureImporter:
     - name: Coin_2
       rect:
         serializedVersion: 2
-        x: 36
-        y: 2
-        width: 7
-        height: 12
+        x: 32
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -94,10 +94,10 @@ TextureImporter:
     - name: Coin_3
       rect:
         serializedVersion: 2
-        x: 53
-        y: 2
-        width: 5
-        height: 12
+        x: 48
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -105,43 +105,43 @@ TextureImporter:
     - name: Coin_4
       rect:
         serializedVersion: 2
-        x: 85
-        y: 2
-        width: 5
-        height: 12
+        x: 64
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: Coin_5
       rect:
         serializedVersion: 2
-        x: 100
-        y: 2
-        width: 7
-        height: 12
+        x: 80
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: Coin_6
       rect:
         serializedVersion: 2
-        x: 116
-        y: 2
-        width: 9
-        height: 12
+        x: 96
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: Coin_7
       rect:
         serializedVersion: 2
-        x: 70
-        y: 2
-        width: 3
-        height: 12
+        x: 112
+        y: 0
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
